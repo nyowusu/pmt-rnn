@@ -1,4 +1,4 @@
-import { Platform } from 'react-native'
+import {Platform} from 'react-native';
 
 const errorCodes = {
   busy: {
@@ -23,7 +23,8 @@ const errorCodes = {
   },
   sourceStatusFailed: {
     errorCode: 'sourceStatusFailed',
-    description: 'The source status is unknown. You shouldn\'t encounter this value.',
+    description:
+      "The source status is unknown. You shouldn't encounter this value.",
   },
   sourceStatusUnknown: {
     errorCode: 'sourceStatusUnknown',
@@ -109,6 +110,6 @@ const errorCodes = {
   permission: {
     errorCode: 'permission',
   },
-}
+};
 
-export default Object.freeze(errorCodes)
+export default Object.freeze(errorCodes);

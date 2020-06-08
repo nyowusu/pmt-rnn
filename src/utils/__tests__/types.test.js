@@ -1,5 +1,5 @@
-import test from 'tape'
-import checkArgs from '../checkArgs'
+import test from 'tape';
+import checkArgs from '../checkArgs';
 import {
   availableApplePayNetworks,
   availableApplePayAddressFields,
@@ -19,77 +19,79 @@ import {
   paymentRequestWithAndroidPayOptionsPropTypes,
   availableSourceTypes,
   createSourceWithParamsPropType,
-} from '../types'
+} from '../types';
 
-const checkPropTypes = (...args) => () => checkArgs(...args)
+const checkPropTypes = (...args) => () => checkArgs(...args);
 
 test('setOptionsOptionsPropTypes', (t) => {
   const passedProps = {
     publishableKey: 'publishableKey',
     merchantId: 'merchantId',
     androidPayMode: 'development',
-  }
+  };
 
-  t.doesNotThrow(checkPropTypes(setOptionsOptionsPropTypes, passedProps))
+  t.doesNotThrow(checkPropTypes(setOptionsOptionsPropTypes, passedProps));
 
-  t.end()
-})
+  t.end();
+});
 
 test('availableApplePayNetworkPropTypes', (t) => {
-  const goodNetworks = availableApplePayNetworks
+  const goodNetworks = availableApplePayNetworks;
 
   // Good cases
   goodNetworks.forEach((network) => {
     t.doesNotThrow(
-      checkPropTypes({ network: availableApplePayNetworkPropTypes }, { network }),
-      `${network} is available ApplePay Network`
-    )
-  })
+      checkPropTypes({network: availableApplePayNetworkPropTypes}, {network}),
+      `${network} is available ApplePay Network`,
+    );
+  });
 
   // Bad cases
-  const badNetworks = ['twitter', 'facebook', 'instagram', 'telegram']
+  const badNetworks = ['twitter', 'facebook', 'instagram', 'telegram'];
 
   badNetworks.forEach((network) => {
     t.throws(
-      checkPropTypes({ network: availableApplePayNetworkPropTypes }, { network }),
-      `${network} should throws when check availableApplePayNetworks`
-    )
-  })
+      checkPropTypes({network: availableApplePayNetworkPropTypes}, {network}),
+      `${network} should throws when check availableApplePayNetworks`,
+    );
+  });
 
-  t.end()
-})
+  t.end();
+});
 
 test('canMakeApplePayPaymentsOptionsPropTypes', (t) => {
-  const passedProps = availableApplePayNetworks
+  const passedProps = availableApplePayNetworks;
 
-  t.doesNotThrow(checkPropTypes(canMakeApplePayPaymentsOptionsPropTypes, passedProps))
+  t.doesNotThrow(
+    checkPropTypes(canMakeApplePayPaymentsOptionsPropTypes, passedProps),
+  );
 
-  t.end()
-})
+  t.end();
+});
 
 test('paymentRequestWithApplePayItemPropTypes', (t) => {
   // Check bad value
-  const badTypes = ['lol', 'kek']
+  const badTypes = ['lol', 'kek'];
 
   badTypes.forEach((type) => {
     const passedProps = {
       type,
       label: 'label',
       amount: 'amount',
-    }
+    };
 
     t.throws(
       checkPropTypes(
         paymentRequestWithApplePayItemPropTypes,
         passedProps,
         'items',
-        'Stripe.paymentRequestWithApplePay'
+        'Stripe.paymentRequestWithApplePay',
       ),
-      `${type} should throws an error about bad type`
-    )
-  })
+      `${type} should throws an error about bad type`,
+    );
+  });
 
-  const goodTypes = ['final', 'pending']
+  const goodTypes = ['final', 'pending'];
 
   // Check typo oneOf('final', 'pending')
   goodTypes.forEach((type) => {
@@ -97,58 +99,62 @@ test('paymentRequestWithApplePayItemPropTypes', (t) => {
       type,
       label: 'label',
       amount: 'amount',
-    }
+    };
 
     t.doesNotThrow(
       checkPropTypes(paymentRequestWithApplePayItemPropTypes, passedProps),
-      'typeSpecs[typeSpecName] is not a function'
-    )
-  })
+      'typeSpecs[typeSpecName] is not a function',
+    );
+  });
 
-  t.end()
-})
+  t.end();
+});
 
 test('paymentRequestWithApplePayItemsPropTypes', (t) => {
-  const types = ['final', 'pending']
+  const types = ['final', 'pending'];
 
   types.forEach((type) => {
     const passedProps = {
-      items: [{
-        type,
-        label: 'label',
-        amount: 'amount',
-      }],
-    }
+      items: [
+        {
+          type,
+          label: 'label',
+          amount: 'amount',
+        },
+      ],
+    };
 
-    t.doesNotThrow(checkPropTypes(paymentRequestWithApplePayItemsPropTypes, passedProps))
-  })
+    t.doesNotThrow(
+      checkPropTypes(paymentRequestWithApplePayItemsPropTypes, passedProps),
+    );
+  });
 
-  t.end()
-})
+  t.end();
+});
 
 test('applePayAddressFieldsPropTypes', (t) => {
-  const goodFields = availableApplePayAddressFields
+  const goodFields = availableApplePayAddressFields;
 
   // Good cases
   goodFields.forEach((field) => {
     t.doesNotThrow(
-      checkPropTypes({ field: applePayAddressFieldsPropTypes }, { field }),
-      `${field} is available ApplePay address field`
-    )
-  })
+      checkPropTypes({field: applePayAddressFieldsPropTypes}, {field}),
+      `${field} is available ApplePay address field`,
+    );
+  });
 
   // Bad cases
-  const badFields = ['home', 'flat', 'door', 'floor']
+  const badFields = ['home', 'flat', 'door', 'floor'];
 
   badFields.forEach((field) => {
     t.throws(
-      checkPropTypes({ field: applePayAddressFieldsPropTypes }, { field }),
-      `${field} should throws when check availableApplePayAddressFields`
-    )
-  })
+      checkPropTypes({field: applePayAddressFieldsPropTypes}, {field}),
+      `${field} should throws when check availableApplePayAddressFields`,
+    );
+  });
 
-  t.end()
-})
+  t.end();
+});
 
 test('applePayOptionShippingMethodPropTypes', (t) => {
   const passedProps = {
@@ -156,12 +162,14 @@ test('applePayOptionShippingMethodPropTypes', (t) => {
     label: 'label',
     detail: 'detail',
     amount: 'amount',
-  }
+  };
 
-  t.doesNotThrow(checkPropTypes(applePayOptionShippingMethodPropTypes, passedProps))
+  t.doesNotThrow(
+    checkPropTypes(applePayOptionShippingMethodPropTypes, passedProps),
+  );
 
-  t.end()
-})
+  t.end();
+});
 
 test('paymentRequestWithApplePayOptionsPropTypes', (t) => {
   availableApplePayShippingTypes.forEach((shippingType) => {
@@ -170,23 +178,27 @@ test('paymentRequestWithApplePayOptionsPropTypes', (t) => {
       countryCode: 'countryCode',
       requiredBillingAddressFields: availableApplePayAddressFields,
       requiredShippingAddressFields: availableApplePayAddressFields,
-      shippingMethods: [{
-        id: 'id',
-        label: 'label',
-        detail: 'detail',
-        amount: 'amount',
-      }],
+      shippingMethods: [
+        {
+          id: 'id',
+          label: 'label',
+          detail: 'detail',
+          amount: 'amount',
+        },
+      ],
       shippingType,
-    }
+    };
 
-    t.doesNotThrow(checkPropTypes(paymentRequestWithApplePayOptionsPropTypes, passedProps))
-  })
+    t.doesNotThrow(
+      checkPropTypes(paymentRequestWithApplePayOptionsPropTypes, passedProps),
+    );
+  });
 
-  t.end()
-})
+  t.end();
+});
 
 test('paymentRequestWithCardFormOptionsPropTypes', (t) => {
-  const billingAddressFields = ['full', 'zip']
+  const billingAddressFields = ['full', 'zip'];
 
   billingAddressFields.forEach((billingAddressField) => {
     const passedProps = {
@@ -216,13 +228,15 @@ test('paymentRequestWithCardFormOptionsPropTypes', (t) => {
         accentColor: 'accentColor',
         errorColor: 'errorColor',
       },
-    }
+    };
 
-    t.doesNotThrow(checkPropTypes(paymentRequestWithCardFormOptionsPropTypes, passedProps))
-  })
+    t.doesNotThrow(
+      checkPropTypes(paymentRequestWithCardFormOptionsPropTypes, passedProps),
+    );
+  });
 
-  t.end()
-})
+  t.end();
+});
 
 test('createTokenWithCardParamsPropTypes', (t) => {
   const passedProps = {
@@ -245,15 +259,17 @@ test('createTokenWithCardParamsPropTypes', (t) => {
     last4: 'last4',
     fingerprint: 'fingerprint',
     funding: 'funding',
-  }
+  };
 
-  t.doesNotThrow(checkPropTypes(createTokenWithCardParamsPropTypes, passedProps))
+  t.doesNotThrow(
+    checkPropTypes(createTokenWithCardParamsPropTypes, passedProps),
+  );
 
-  t.end()
-})
+  t.end();
+});
 
 test('createTokenWithBankAccountParamsPropTypes', (t) => {
-  const accountHolderTypes = ['company', 'individual']
+  const accountHolderTypes = ['company', 'individual'];
 
   accountHolderTypes.forEach((accountHolderType) => {
     const passedProps = {
@@ -263,13 +279,15 @@ test('createTokenWithBankAccountParamsPropTypes', (t) => {
       routingNumber: 'routingNumber',
       accountHolderName: 'accountHolderName',
       accountHolderType,
-    }
+    };
 
-    t.doesNotThrow(checkPropTypes(createTokenWithBankAccountParamsPropTypes, passedProps))
-  })
+    t.doesNotThrow(
+      checkPropTypes(createTokenWithBankAccountParamsPropTypes, passedProps),
+    );
+  });
 
-  t.end()
-})
+  t.end();
+});
 
 test('androidPayLineItemPropTypes', (t) => {
   const passedProps = {
@@ -278,32 +296,36 @@ test('androidPayLineItemPropTypes', (t) => {
     unit_price: 'unit_price',
     quantity: 'quantity',
     description: 'description',
-  }
+  };
 
-  t.doesNotThrow(checkPropTypes(androidPayLineItemPropTypes, passedProps))
+  t.doesNotThrow(checkPropTypes(androidPayLineItemPropTypes, passedProps));
 
-  t.end()
-})
+  t.end();
+});
 
 test('paymentRequestWithAndroidPayOptionsPropTypes', (t) => {
   const passedProps = {
     total_price: 'total_price',
     currency_code: 'currency_code',
-    line_items: [{
-      currency_code: 'currency_code',
-      total_price: 'total_price',
-      unit_price: 'unit_price',
-      quantity: 'quantity',
-      description: 'description',
-    }],
+    line_items: [
+      {
+        currency_code: 'currency_code',
+        total_price: 'total_price',
+        unit_price: 'unit_price',
+        quantity: 'quantity',
+        description: 'description',
+      },
+    ],
     shipping_address_required: false,
     billing_address_required: false,
-  }
+  };
 
-  t.doesNotThrow(checkPropTypes(paymentRequestWithAndroidPayOptionsPropTypes, passedProps))
+  t.doesNotThrow(
+    checkPropTypes(paymentRequestWithAndroidPayOptionsPropTypes, passedProps),
+  );
 
-  t.end()
-})
+  t.end();
+});
 
 test('createSourceWithParamsPropType', (t) => {
   availableSourceTypes.forEach((type) => {
@@ -335,14 +357,14 @@ test('createSourceWithParamsPropType', (t) => {
       funding: 'funding',
       id: 'id',
       last4: 'last4',
-    }
+    };
 
     t.doesNotThrow(
       checkPropTypes(createSourceWithParamsPropType, passedProps),
       null,
-      `Type \`${type}\` should not throws`
-    )
-  })
+      `Type \`${type}\` should not throws`,
+    );
+  });
 
   const wrongNumberProps = {
     type: 'card',
@@ -350,13 +372,13 @@ test('createSourceWithParamsPropType', (t) => {
     expMonth: 11,
     expYear: 29,
     cvc: 'cvc',
-  }
+  };
 
   t.throws(
     checkPropTypes(createSourceWithParamsPropType, wrongNumberProps),
     /Invalid .* `number` of type `number` supplied to .*, expected `string`\./,
-    'With `card` type, `number` should be a string'
-  )
+    'With `card` type, `number` should be a string',
+  );
 
   const wrongExpMonthProps = {
     type: 'card',
@@ -364,13 +386,13 @@ test('createSourceWithParamsPropType', (t) => {
     expMonth: '10',
     expYear: 29,
     cvc: 'cvc',
-  }
+  };
 
   t.throws(
     checkPropTypes(createSourceWithParamsPropType, wrongExpMonthProps),
     /Invalid .* `expMonth` of type `string` supplied to .*, expected `number`\./,
-    'With `card` type, `expMonth` should be a number'
-  )
+    'With `card` type, `expMonth` should be a number',
+  );
 
   const wrongExpYearProps = {
     type: 'card',
@@ -378,13 +400,13 @@ test('createSourceWithParamsPropType', (t) => {
     expMonth: 11,
     expYear: '19',
     cvc: 'cvc',
-  }
+  };
 
   t.throws(
     checkPropTypes(createSourceWithParamsPropType, wrongExpYearProps),
     /Invalid .* `expYear` of type `string` supplied to .*, expected `number`\./,
-    'With `card` type, `expYear` should be a number'
-  )
+    'With `card` type, `expYear` should be a number',
+  );
 
   const wrongCvcProps = {
     type: 'card',
@@ -392,13 +414,13 @@ test('createSourceWithParamsPropType', (t) => {
     expMonth: 11,
     expYear: 29,
     cvc: 123,
-  }
+  };
 
   t.throws(
     checkPropTypes(createSourceWithParamsPropType, wrongCvcProps),
     /Invalid .* `cvc` of type `number` supplied to .*, expected `string`\./,
-    'With `card` type, `cvc` should be a string'
-  )
+    'With `card` type, `cvc` should be a string',
+  );
 
-  t.end()
-})
+  t.end();
+});

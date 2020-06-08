@@ -1,26 +1,6 @@
-import React from 'react';
-// import {StyleSheet, View, Text} from 'react-native';
+import {screensToRegister} from './src/config/navigation';
 
-import {ScreenNames} from './src/constants/screens';
-
-// Screens
-import Home from './src/screens/Home';
-import PaymentForm from './src/components/PaymentFormView';
-
-const Screens = {
-  [ScreenNames.HomeScreen]: Home,
-  [ScreenNames.PaymentScreen]: PaymentForm,
-};
-
-// import stripe from 'tipsi-stripe';
-
-// import Config from 'react-native-config';
-
-const App = () => {
-  return <PaymentForm />;
-};
-
-export default App;
+screensToRegister();
 
 // export default class CardFormScreen extends PureComponent {
 //   static title = 'Card Form';

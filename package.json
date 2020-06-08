@@ -14,9 +14,11 @@
     "react": "16.11.0",
     "react-native": "0.62.2",
     "react-native-config": "^1.2.0",
+    "react-native-elements": "^2.0.1",
     "react-native-input-credit-card": "^0.5.5",
     "react-native-keyboard-spacer": "^0.4.1",
     "react-native-navigation": "^6.7.1",
+    "react-native-vector-icons": "^6.6.0",
     "tipsi-stripe": "^7.5.3"
   },
   "devDependencies": {
